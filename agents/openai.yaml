@@ -1,0 +1,3 @@
+display_name: Visio Diagram
+short_description: Draw Visio ER, flowchart, and sequence diagrams; analyze and register new Visio templates after confirmation.
+default_prompt: Use the unified Visio diagram skill. For drawing, identify whether the request is for an ER diagram, flowchart, or sequence diagram; ask for clarification when unclear, then load only the matching reference and validate before drawing. For new templates, analyze the .vsdx XML first, summarize structure and complexity, ask whether to add it, and register only after explicit confirmation.

@@ -1,0 +1,77 @@
+{
+  "version": 1,
+  "templates": [
+    {
+      "id": "ER_even",
+      "diagram_type": "er",
+      "file": "template/er/ER_even.vsdx",
+      "source": "built-in"
+    },
+    {
+      "id": "ER_odd",
+      "diagram_type": "er",
+      "file": "template/er/ER_odd.vsdx",
+      "source": "built-in"
+    },
+    {
+      "id": "template_1",
+      "diagram_type": "flowchart",
+      "file": "template/flowchart/template_1.vsdx",
+      "source": "built-in"
+    },
+    {
+      "id": "template_2",
+      "diagram_type": "flowchart",
+      "file": "template/flowchart/template_2.vsdx",
+      "source": "built-in"
+    },
+    {
+      "id": "template_3",
+      "diagram_type": "flowchart",
+      "file": "template/flowchart/template_3.vsdx",
+      "source": "built-in"
+    },
+    {
+      "id": "template_4",
+      "diagram_type": "flowchart",
+      "file": "template/flowchart/template_4.vsdx",
+      "source": "built-in"
+    },
+    {
+      "id": "template_1",
+      "diagram_type": "sequence",
+      "file": "template/sequence/template_1.vsdx",
+      "source": "built-in"
+    },
+    {
+      "id": "template_2",
+      "diagram_type": "sequence",
+      "file": "template/sequence/template_2.vsdx",
+      "source": "built-in"
+    },
+    {
+      "id": "template_4",
+      "diagram_type": "sequence",
+      "file": "template/sequence/template_4.vsdx",
+      "source": "built-in"
+    },
+    {
+      "id": "template_5",
+      "diagram_type": "sequence",
+      "file": "template/sequence/template_5.vsdx",
+      "source": "built-in"
+    },
+    {
+      "id": "template_6",
+      "diagram_type": "sequence",
+      "file": "template/sequence/template_6.vsdx",
+      "source": "built-in"
+    },
+    {
+      "id": "template_7",
+      "diagram_type": "sequence",
+      "file": "template/sequence/template_7.vsdx",
+      "source": "built-in"
+    }
+  ]
+}
