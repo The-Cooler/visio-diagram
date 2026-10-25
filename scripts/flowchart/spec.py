@@ -15,6 +15,9 @@ import re
 FLOWCHART_TEXT_MAX_LEN = 4
 _FLOWCHART_ALLOWED_TEXT = re.compile(r"^[一-鿿A-Za-z0-9]+$")
 
+# 输入类动作词：出现在 input 槽位是必须的，出现在 process（矩形）槽位则说明放错了形状
+INPUT_VERBS: tuple[str, ...] = ("编辑", "写入", "输入", "填写", "录入", "添加", "新建", "创建")
+
 # 与 Visio 模板占位顺序一致：第 i 个可替换形状对应 nodes[i]
 TEMPLATE_1_ROLES: tuple[str, ...] = (
     "start",  # 圆角·开始
@@ -111,13 +114,17 @@ def validate_flowchart_text(index: int, role: str, text: Any) -> list[str]:
             f'flowchart: nodes[{index}].text 判断框必须为判断句式，且以"是否"开头（如"是否登录"），当前为 {ts!r}'
         )
     if role == "input":
-        has_verb = any(
-            kw in ts
-            for kw in ["编辑", "写入", "输入", "填写", "录入", "添加", "新建", "创建"]
-        )
+        has_verb = any(kw in ts for kw in INPUT_VERBS)
         if not has_verb:
             errs.append(
                 f'flowchart: nodes[{index}].text 输入框必须包含动作动词（如"编辑"、"写入"、"输入"等），当前为 {ts!r}'
+            )
+    if role == "process":
+        matched = [kw for kw in INPUT_VERBS if kw in ts]
+        if matched:
+            errs.append(
+                f'flowchart: nodes[{index}].text 是输入类内容（含"{"、".join(matched)}"），不能放在矩形处理框；'
+                f"模板有输入框（平行四边形）时移到该槽位，没有输入框时改成非录入类描述，当前为 {ts!r}"
             )
     return errs
 

@@ -7,6 +7,7 @@ from typing import Any
 
 FLOWCHART_TEXT_MAX_LEN = 4
 ALLOWED_TEXT = re.compile(r"^[一-鿿A-Za-z0-9]+$")
+INPUT_VERBS: tuple[str, ...] = ("编辑", "写入", "输入", "填写", "录入", "添加", "新建", "创建")
 
 TEMPLATE_ROLES: dict[int, tuple[str, ...]] = {
     1: ("start", "process", "process", "decision", "process", "process", "process", "end"),
@@ -56,8 +57,15 @@ def validate_flowchart_payload(payload: dict[str, Any]) -> list[str]:
             errs.append(f"nodes[{idx}].text contains invalid symbols or whitespace")
         if exp == "decision" and not ts.startswith("是否"):
             errs.append(f'nodes[{idx}].text decision must start with "是否"')
-        if exp == "input" and not any(k in ts for k in ("编辑", "写入", "输入", "填写", "录入", "添加", "新建", "创建")):
+        if exp == "input" and not any(k in ts for k in INPUT_VERBS):
             errs.append(f"nodes[{idx}].text input must contain an action verb")
+        if exp == "process":
+            matched = [k for k in INPUT_VERBS if k in ts]
+            if matched:
+                errs.append(
+                    f"nodes[{idx}].text is input-like ({'/'.join(matched)}), "
+                    f"must use the input slot, not a process rectangle"
+                )
     return errs
 
 
